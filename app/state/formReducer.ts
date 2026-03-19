@@ -34,13 +34,59 @@ export function formReducer(state: FormState, action: FormAction): FormState {
                 access: { ...fresh.accessibility.access, ...(action.payload.accessibility?.access ?? {}) },
                 formatAndStandards:{ ...fresh.accessibility.formatAndStandards, ...(action.payload.accessibility?.formatAndStandards ?? {}) },
                 },
-                linkage: { ...fresh.linkage, ...(action.payload.linkage ?? {}) },
+                linkage: { 
+                    // ...fresh.linkage, 
+                    // ...(action.payload.linkage ?? {}) 
+                    investigations: action.payload.linkage?.investigations ?? fresh.linkage.investigations,
+                    tools: action.payload.linkage?.tools ?? fresh.linkage.tools,
+                    publicationAboutDataset: action.payload.linkage?.publicationAboutDataset ?? fresh.linkage.publicationAboutDataset,
+                    publicationUsingDataset: action.payload.linkage?.publicationUsingDataset ?? fresh.linkage.publicationUsingDataset,
+                    derivedFrom: action.payload.linkage?.derivedFrom ?? fresh.linkage.derivedFrom,
+                    isPartOf: action.payload.linkage?.isPartOf ?? fresh.linkage.isPartOf,
+                    linkableDatasets: action.payload.linkage?.linkableDatasets ?? fresh.linkage.linkableDatasets,
+                    similarToDatasets: action.payload.linkage?.similarToDatasets ?? fresh.linkage.similarToDatasets,
+                },
                 structuralMetadata:  { ...fresh.structuralMetadata, ...(action.payload.structuralMetadata  ?? {}) },
                 observations: action.payload.observations ?? fresh.observations,
                 demographicFrequency:{
                     age: action.payload.demographicFrequency?.age ?? fresh.demographicFrequency.age,
                     ethnicity:action.payload.demographicFrequency?.ethnicity ?? fresh.demographicFrequency.ethnicity,
                     disease: action.payload.demographicFrequency?.disease ?? fresh.demographicFrequency.disease,
+                }
+            }
+        }
+
+        case "ADD_LINKAGE_OPTS": {
+            const entry =  { id: Date.now(), identifier_of_dataset: "", title_of_dataset: "", url_of_dataset: ""  }
+            return {                
+                ...state,
+                linkage: {
+                    ...state.linkage,
+                    [action.category]: [...state.linkage[action.category], entry]
+                }
+            }
+        }
+
+        case "UPDATE_LINKAGE_OPTS": {
+            return {
+                ...state,
+                linkage: {
+                    ...state.linkage,
+                    [action.category]: (state.linkage[action.category] as { id: number}[]).map((e) =>
+                        e.id === action.id ? { ...e, [action.field]: action.value } : e
+                    )
+                }
+            }
+        }
+
+        case "REMOVE_LINKAGE_OPTS": {
+            return {
+                ...state,
+                linkage: {
+                    ...state.linkage,
+                    [action.category]: (state.linkage[action.category] as { id: number }[]).filter(
+                        (e) => e.id !== action.id
+                    )
                 }
             }
         }

@@ -3,7 +3,7 @@ import { Field, Grid2, SectionShell } from "~/ui/FormControls";
 
 export  function CoverageLayout () {
     return (
-    <SectionShell icon="◉" label="Coverage" color="#10B981">
+    <SectionShell label="Coverage" color="#10B981">
       <Field path="coverage.spatial" label="Geographic Coverage" required placeholder="United Kingdom, England — or ISO 3166 codes" />
       <Grid2>
         <Field path="coverage.typicalAgeRangeMin" label="Min Age Range (years)" type="number" placeholder="0" />

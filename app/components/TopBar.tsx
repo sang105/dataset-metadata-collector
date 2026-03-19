@@ -1,5 +1,5 @@
 // app/components/layout/TopBar.tsx
-import { useFormActions, useFormNav } from "app/context/FormContext";
+import { useFormNav } from "app/context/FormContext";
 import { NavLink } from "react-router";
 
 interface TopBarProps {
@@ -8,7 +8,6 @@ interface TopBarProps {
 }
 
 export function TopBar({ onExport, onReset }: TopBarProps) {
-  // const { resetForm } = useFormActions();
   const { saveStatus, lastSaved } = useFormNav();
 
   return (
@@ -20,7 +19,11 @@ export function TopBar({ onExport, onReset }: TopBarProps) {
       {/* Schema badge */}
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <NavLink to='/'>
-          <span style={{ fontSize: 10, background: "#0F2744", color: "#FFFFFF", padding: "2px 9px", borderRadius: 20, fontFamily: "'DM Mono', monospace", border: "1px solid #FFF" }}>IEU HDRUK METADATA COLLECTOR / 1.0</span>
+          <span 
+            className="hover:bg-[linear-gradient(135deg,#0EA5E9,#6366F1)] hover:text-white hover:cursor-pointer hover:font-bold hover:shadow-2xl hover:border-[linear-gradient(135deg,#0EA5E9,#6366F1)] text-white bg-transparent text-xs border rounded-3xl transition border-[#FFF] py-1 px-2 font-sans"
+          >
+            IEU HDRUK METADATA COLLECTOR
+          </span>
         </NavLink>
       </div>
 
@@ -29,12 +32,14 @@ export function TopBar({ onExport, onReset }: TopBarProps) {
         {/* Save indicator */}
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: saveStatus === "saved" ? "#10B981" : saveStatus === "saving" ? "#F59E0B" : "#FFF", transition: "background 0.3s" }} />
-          <span style={{ fontSize: 11, color: "#FFF", fontFamily: "'DM Mono', monospace" }}>
-            {saveStatus === "saving" ? "Saving…" : saveStatus === "saved" ? "Saved" : lastSaved ? new Date(lastSaved).toLocaleTimeString() : ""}
+          <span style={{ fontSize: 11, color: "#FFF", fontFamily: "'DM Sans', sans-serif" }}>
+            {saveStatus === "saving" ? "Saving locally…" : saveStatus === "saved" ? "Saved locally" : lastSaved ? new Date(lastSaved).toLocaleTimeString() : ""}
           </span>
         </div>
 
-        <button onClick={onReset} style={{ background: "none", border: "1px solid #FFF", color: "#FFF", borderRadius: 6, padding: "5px 14px", fontSize: 11, cursor: "pointer", fontFamily: "'DM Mono', monospace" }}>
+        <button onClick={onReset}
+          className="hover:bg-[linear-gradient(135deg,#0EA5E9,#6366F1)] hover:text-white hover:cursor-pointer hover:font-semibold hover:shadow-2xl hover:border-[linear-gradient(135deg,#0EA5E9,#6366F1)] text-white bg-transparent text-xs border rounded-md transition border-[#FFF] py-1 px-3 font-sans"
+         >
           Reset
         </button>
 

@@ -4,7 +4,7 @@ import { Field, Grid2, SectionShell, SubSection } from "~/ui/FormControls";
 
 export function ProvenanceFormLayout() {
     return (
-        <SectionShell icon="◐" label="Provenance" color="#F59E0B">
+        <SectionShell label="Provenance" color="#F59E0B">
             <SubSection title="Origin" color="#F59E0B" />
                 <Field path="provenance.origin.purpose" label="Purpose of Dataset Collection"   type="multiselect" options={OPTIONS.purpose} />
                 <Field path="provenance.origin.source" label="Source of Data Extraction" type="multiselect" options={OPTIONS.source} />

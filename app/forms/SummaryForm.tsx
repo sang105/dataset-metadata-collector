@@ -3,7 +3,7 @@ import { Field, Grid2, SectionShell, SubSection } from "~/ui/FormControls";
 
 export function SummaryFormLayout() {
     return (
-        <SectionShell icon="" label="Summary" color="#0B1629">
+        <SectionShell label="Summary" color="#0B1629">
             <Field 
                 path="summary.title" 
                 label="Title" 
@@ -22,8 +22,10 @@ export function SummaryFormLayout() {
                 <Field 
                     path="summary.contactPoint"   
                     label="Contact Point (Email)" 
-                    required type="email" 
-                    placeholder="gateway@hdruk.ac.uk" 
+                    type="email"
+                    required
+                    defaultValue='sm.colley@bristol.ac.uk'
+                    readOnly
                 />
                 <Field 
                     path="summary.populationSize" 
@@ -55,38 +57,40 @@ export function SummaryFormLayout() {
             <SubSection title="Data Custodian" color="#0EA5E9" />
             <Grid2>
                 <Field 
-                    path="summary.custodian.name"         
+                    path="summary.dataCustodian.name"         
                     label="Organisation Name" 
                     required 
-                    placeholder="Health Data Research UK" 
+                    placeholder="NIHR Bristol Biomedical Research Centre" 
                 />
                 <Field 
-                    path="summary.custodian.contactPoint" 
+                    path="summary.dataCustodian.contactPoint" 
                     label="Contact Email"     
                     required type="email" 
-                    placeholder="info@hdruk.ac.uk" 
+                    defaultValue="sm.colley@bristol.ac.uk"
+                    readOnly
                 />
             </Grid2>
             <Grid2>
                 <Field 
-                    path="summary.custodian.identifier" 
-                    label="DOI Identifier"   
-                    placeholder="https://ror.org/053fq8t95" 
+                    path="summary.dataCustodian.identifier" 
+                    label="Data Custodian Identifier"   
+                    readOnly
+                    defaultValue="NIHR Bristol Biomedical Research Centre"
                 />
                 <Field 
-                    path="summary.custodian.memberOf"   
+                    path="summary.dataCustodian.memberOf"   
                     label="Membership"       
                     type="select" 
                     options={OPTIONS.memberOf} />
             </Grid2>
             <Field 
-                    path="summary.custodian.description" 
+                    path="summary.dataCustodian.description" 
                     label="Organisation Description" 
                     type="textarea" rows={3} 
                     placeholder="Brief description of the organisation…" 
                 />
             <Field 
-                    path="summary.custodian.logo"        
+                    path="summary.dataCustodian.logo"        
                     label="Logo URL"              
                     type="url"  
                     placeholder="https://…/logo.png" 

@@ -17,7 +17,7 @@ export interface SummarySection {
   keywords: string[];
   doiName: string;
   datasetAliases: string;
-  custodian: DataCustodian;
+  dataCustodian: DataCustodian;
 }
 
 export interface DocumentationSection {
@@ -77,11 +77,20 @@ export interface AccessibilitySection {
   };
 }
 
+export interface DerivedFromEntry { id: number; identifier_of_dataset: string; title_of_dataset: string; url_of_dataset: string }
+export interface IsPartOfEntry { id: number; identifier_of_dataset: string; title_of_dataset: string; url_of_dataset: string }
+export interface LinkableDatasetsEntry { id: number; identifier_of_dataset: string; title_of_dataset: string; url_of_dataset: string }
+export interface SimilarToDatasetsEntry { id: number; identifier_of_dataset: string; title_of_dataset: string; url_of_dataset: string }
+
 export interface LinkageSection {
   investigations: string;
   tools: string;
   publicationAboutDataset: string;
   publicationUsingDataset: string;
+  derivedFrom: DerivedFromEntry[];
+  isPartOf: IsPartOfEntry[];
+  linkableDatasets: LinkableDatasetsEntry[];
+  similarToDatasets: SimilarToDatasetsEntry[];
 }
 
 export interface TableColumn {
@@ -144,13 +153,16 @@ export interface SectionProgress {
   isComplete: boolean;
 }
 
-
 export type ProgressMap = Record<string, SectionProgress>
 
 export type FormAction = 
   | { type: "SET_FIELD";       path: string; value: unknown }
   | { type: "LOAD_DRAFT";      payload: Partial<FormState> }
   | { type: "RESET" }
+  // Enrichment and Linkage CRUD
+  | { type: "ADD_LINKAGE_OPTS"; category: "derivedFrom" | "isPartOf" | "linkableDatasets" | "similarToDatasets" }
+  | { type: "UPDATE_LINKAGE_OPTS"; category: "derivedFrom" | "isPartOf" | "linkableDatasets" | "similarToDatasets"; id: number; field: string; value: string}
+  | { type: "REMOVE_LINKAGE_OPTS"; category: "derivedFrom" | "isPartOf" | "linkableDatasets" | "similarToDatasets"; id: number }
   // Observation CRUD
   | { type: "ADD_OBSERVATION" }
   | { type: "UPDATE_OBSERVATION"; id: number; field: string; value: string }

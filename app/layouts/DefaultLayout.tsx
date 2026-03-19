@@ -4,7 +4,7 @@ import { ExportModal, ResetModal } from "~/components/ExportModal";
 import { GuidePanel } from "~/components/GuidePanel";
 import { Sidebar } from "~/components/Sidebar";
 import { TopBar } from "~/components/TopBar";
-import { Pagination } from "~/components/Pagination";
+import { Pagination }  from "~/components/Pagination";
 import { useFormActions } from "~/context/FormContext"
 
 

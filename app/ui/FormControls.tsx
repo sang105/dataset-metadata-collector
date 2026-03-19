@@ -9,21 +9,21 @@ export const S = {
   input: {
     width: "100%", padding: "9px 12px",
     background: "#0B1629", border: "1px solid #1E2D45",
-    borderRadius: 8, color: "#E2E8F0", fontSize: 13,
+    borderRadius: 8, color: "#E2E8F0", fontSize: 14,
     outline: "none", boxSizing: "border-box" as const,
     fontFamily: "'DM Sans', sans-serif", transition: "border-color 0.2s",
   },
   label: {
-    display: "block" as const, fontSize: 10, color: "#0B1629",
+    display: "block" as const, fontSize: 12, color: "#0B1629",
     marginBottom: 6, textTransform: "uppercase" as const,
-    letterSpacing: "0.1em", fontFamily: "'DM Mono', monospace",
+    letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif",
   },
   group: { marginBottom: 22 },
   required: { color: "#F87171", marginLeft: 3 },
   addBtn: {
     background: "none", border: "1px dashed #1E2D45", color: "#475569",
     cursor: "pointer", borderRadius: 8, padding: "6px 16px",
-    fontSize: 12, fontFamily: "'DM Mono', monospace",
+    fontSize: 12, fontFamily: "'DM Sans', sans-serif",
   },
   removeBtn: {
     background: "#1A0A0A", border: "1px solid #7F1D1D", color: "#F87171",
@@ -31,8 +31,8 @@ export const S = {
     fontSize: 14, flexShrink: 0 as const,
   },
   subheading: {
-    fontSize: 10, color: "#334155", textTransform: "uppercase" as const,
-    letterSpacing: "0.1em", fontFamily: "'DM Mono', monospace",
+    fontSize: 12, color: "#334155", textTransform: "uppercase" as const,
+    letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif",
     marginBottom: 10, marginTop: 6,
   },
 };
@@ -56,9 +56,9 @@ export function TagInput({ value = [], onChange, onFocus, placeholder }: TagInpu
             {value.length > 0 && (
               <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
                 {value.map(t => (
-                  <span key={t} style={{ background: "#0F2744", color: "#7DD3FC", padding: "2px 10px", borderRadius: 20, fontSize: 11, display: "flex", alignItems: "center", gap: 5 }}>
+                  <span key={t} style={{ background: "#0EA5E9", color: "#FFF", padding: "2px 10px", borderRadius: 20, fontSize: 12, display: "flex", alignItems: "center", gap: 5 }}>
                     {t}
-                    <button onClick={() => onChange(value.filter(x => x !== t))} style={{ background: "none", border: "none", color: "#7DD3FC", cursor: "pointer", padding: 0, lineHeight: 1 }}>×</button>
+                    <button onClick={() => onChange(value.filter(x => x !== t))} style={{ background: "none", border: "none", color: "#FFF", cursor: "pointer", padding: 0, lineHeight: 1 }}>×</button>
                   </span>
                 ))}
               </div>
@@ -69,9 +69,9 @@ export function TagInput({ value = [], onChange, onFocus, placeholder }: TagInpu
                 onChange={e => setInp(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); add(); } }}
                 placeholder={placeholder || "Type and press Enter…"}
-                style={{ flex: 1, background: "none", border: "none", outline: "none", color: "#CBD5E1", fontSize: 12, fontFamily: "'DM Mono', monospace" }}
+                style={{ flex: 1, background: "none", border: "none", outline: "none", color: "#CBD5E1", fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}
               />
-              <button onClick={add} style={{ background: "#0F2744", border: "none", color: "#7DD3FC", cursor: "pointer", borderRadius: 6, padding: "2px 10px", fontSize: 11 }}>+ Add</button>
+              <button onClick={add} style={{ background: "#0EA5E9", border: "none", color: "#FFF", cursor: "pointer", borderRadius: 6, padding: "2px 10px", fontSize: 12 }}>+ Add</button>
             </div>
           </div>
         );
@@ -92,7 +92,16 @@ export function MultiSelect({ value = [], onChange, options, onFocus }: MultiSel
         const sel = value.includes(o);
         return (
           <button key={o} type="button" onClick={() => onChange(sel ? value.filter(v => v !== o) : [...value, o])}
-            style={{ padding: "4px 12px", borderRadius: 20, fontSize: 11, cursor: "pointer", border: sel ? "1px solid #3B82F6" : "1px solid #1E2D45", background: sel ? "#0F2744" : "#0B1629", color: sel ? "#7DD3FC" : "#D3D3D3", transition: "all 0.15s", fontFamily: "'DM Sans', sans-serif" }}>
+            style={{ 
+              padding: "4px 12px", 
+              borderRadius: 20, 
+              fontSize: 12, 
+              cursor: "pointer", 
+              border: sel ? "1px solid #0B1629" : "1px solid #0B1629",
+              background: sel ? "#0B1629" : "#FFF",
+              color: sel ? "#FFF" : "#0B1629",
+              transition: "all 0.15s", 
+              fontFamily: "'DM Sans', sans-serif" }}>
             {o}
           </button>
         );
@@ -112,18 +121,33 @@ interface FieldProps {
   required?: boolean;
   maxLength?: number;
   hint?: string; // optional inline hint
+  readOnly?: boolean
+  defaultValue?: string | number
 }
 
-export function Field({ path, label, type = "text", options = [], placeholder, rows = 4, required, maxLength, hint }: FieldProps) {
+export function Field({ path, label, type = "text", options = [], placeholder, rows = 4, required, maxLength, hint, readOnly, defaultValue }: FieldProps) {
   const { value, onChange, onFocus, onBlur } = useField(path);
   const val = (value ?? (type === "multiselect" || type === "tags" ? [] : "")) as string | string[];
 
+
+  const isEmpty = value === "" || value === null || value === undefined
+  const displayValue = (isEmpty && defaultValue !== undefined) ? defaultValue : val
+
+  useEffect(() => {
+    if (defaultValue !== undefined && (value === "" || value === null || value === undefined)) {
+      onChange(defaultValue)
+    }
+  },[defaultValue])
+
+  const readOnlyStyle = readOnly ? { opacity: 0.7, cursor: "not-allowed", background: "#070F1C" } : {}
+
   const inputProps = {
-    style: S.input,
+    style: { ...S.input, ...readOnlyStyle},
     onFocus,
     onBlur,
     placeholder,
     ...(maxLength ? { maxLength } : {}),
+    readOnly
   };
 
   return (
@@ -168,9 +192,10 @@ export function Field({ path, label, type = "text", options = [], placeholder, r
       ) : (
         <input
           type={type}
-          value={val as string}
-          onChange={e => onChange(e.target.value)}
+          value={displayValue as string}
+          onChange={e => !readOnly && onChange(e.target.value)}
           {...inputProps}
+          readOnly={readOnly}
         />
       )}
 
@@ -181,17 +206,15 @@ export function Field({ path, label, type = "text", options = [], placeholder, r
 
 // ── SectionShell — consistent section wrapper ─────────────────
 interface SectionShellProps {
-  icon: string;
   label: string;
   color: string;
   children: React.ReactNode;
 }
 
-export function SectionShell({ icon, label, color, children }: SectionShellProps) {
+export function SectionShell({ label, color, children }: SectionShellProps) {
   return (
     <div style={{ paddingBottom: 60 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-        <span style={{ fontSize: 20, color }}>{icon}</span>
         <h1 style={{ fontSize: 22, fontWeight: 700, color: "#0B1629", fontFamily: "'DM Sans', sans-serif", margin: 0 }}>{label}</h1>
       </div>
       <div style={{ height: 1, background: "#0D1B2E", marginBottom: 28 }} />
@@ -205,7 +228,7 @@ export function SubSection({ title, color = "#1E2D45" }: { title: string; color?
   return (
     <div style={{ margin: "24px 0 16px", display: "flex", alignItems: "center", gap: 10 }}>
       <div style={{ width: 3, height: 14, background: color, borderRadius: 2 }} />
-      <span style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'DM Mono', monospace" }}>{title}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif" }}>{title}</span>
     </div>
   );
 }

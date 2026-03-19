@@ -1,15 +1,16 @@
+import { OPTIONS } from "~/constants/schema";
 import { DemoSection } from "~/ui/DemographicEditor";
 import { SectionShell } from "~/ui/FormControls";
 
 export function DemographicFrequencyFormLayout() {
     return (
-    <SectionShell icon="⬢" label="Demographic Frequency" color="#F97316">
+    <SectionShell label="Demographic Frequency" color="#F97316">
       <DemoSection
         category="age"
         title="Demographic Frequency Age"
         color="#F97316"
         fields={[
-          { key: "bin",   placeholder: "Age Grouping (0-6days, 7-27days, .., 1-4years, 5-9years)" },
+          { key: "bin",   placeholder: "Select Age Grouping", type: "select", options: OPTIONS.demographicAgeRange },
           { key: "count", placeholder: "Age Count", type: "number" },
         ]}
       />
@@ -21,7 +22,7 @@ export function DemographicFrequencyFormLayout() {
         title="Demographic Frequency Ethnicity"
         color="#F97316"
         fields={[
-          { key: "bin",   placeholder: "Ethnicity Grouping (White - Bristish, White - Irish, ..)" },
+          { key: "bin",   placeholder: "Select Ethnicity Grouping", type: "select", options: OPTIONS.demographicEthnicGrouping },
           { key: "count", placeholder: "Ethnicity Count", type: "number" },
         ]}
       />
@@ -34,7 +35,7 @@ export function DemographicFrequencyFormLayout() {
         color="#F97316"
         fields={[
           { key: "diseaseCode",           placeholder: "Disease code)" },
-          { key: "diseaseCodeVocabulary",  placeholder: "Disease code and Vocabulary (ICD10, SNOMED CT, MeSH)" },
+          { key: "diseaseCodeVocabulary",  placeholder: "Select Disease code and Vocabulary", type: "select", options: OPTIONS.demographicDiseaseCodes },
           { key: "count",                  placeholder: "Count", type: "number" },
         ]}
       />

@@ -54,7 +54,7 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
   },
   "summary.contactPoint": {
     label: "Contact Point (Email)", required: true,
-    guidance: "Provide a valid email address for coordinating data access requests. Organisations should provide a dedicated email associated with the data access request process. An employee's email can only be provided temporarily with explicit consent. IEU contact point (sm.colley@bristol.ac.uk)",
+    guidance: "A valid email address for coordinating data access requests has been provided by default. This field shows that organisations should provide a dedicated email associated with the data access request process. An employee's email can only be provided temporarily with explicit consent. IEU contact point (sm.colley@bristol.ac.uk)",
     example: "sm.colley@bristol.ac.uk",
   },
   "summary.populationSize": {
@@ -77,17 +77,17 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
     guidance: "Dataset & BioSample alias or alternate names. Alternate name, acronym or other identifier for the Dataset and/or BioSamples, as a comma-separated list.",
     example: "CPRD, Clinical Practice Research Datalink",
   },
-  "summary.custodian.name": {
+  "summary.dataCustodian.name": {
     label: "Data Custodian Name", required: true,
     guidance: "The organisation responsible for running or supporting the data access request process. In most cases this will be the same as the HDR UK Organisation (Hub or Alliance Member).",
     example: "Health Data Research UK",
   },
-  "summary.custodian.contactPoint": {
+  "summary.dataCustodian.contactPoint": {
     label: "Data Custodian Contact", required: true,
-    guidance: "Organisation contact point(s) for receiving queries. If not provided, this defaults to the team's support email.",
+    guidance: "The organisation contact point(s) for receiving queries which has been provided by default. If this value is not provided, it defaults to the team's support email.",
     example: "info@hdruk.ac.uk",
   },
-  "summary.custodian.memberOf": {
+  "summary.dataCustodian.memberOf": {
     label: "Membership",
     guidance: "Indicate if the organisation is an Alliance Member, Hub, NCS (National Core Studies) or Other. Defaults to the membership for the team submitting the metadata.",
     example: "Alliance",
@@ -225,7 +225,7 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
   "accessibility.access.dataController": {
     label: "Data Controller",
     guidance: "The organisation that, alone or jointly with others, determines the purposes and means of the processing of personal data. Usually the organisation that collected the data.",
-    example: "NIHR Bristol  Biomedical Research Centre",
+    example: "NIHR Bristol Biomedical Research Centre",
   },
   "accessibility.formatAndStandards.vocabularyEncodingScheme": {
     label: "Vocabulary Encoding Scheme",
@@ -266,6 +266,26 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
     label: "Publications Using Dataset",
     guidance: "DOIs or URLs of publications that have used data from this dataset.",
     example: "10.1016/S0140-6736(21)00143-8",
+  },
+  "linkage.derivedFrom": {
+    label: "Derived From",
+    guidance: "",
+    example: ""
+  },
+  "linkage.isPartOf": {
+    label: "Is Part Of",
+    guidance: "",
+    example: ""
+  },
+  "linkage.linkableDatasets": {
+    label: "Linkable Datasets",
+    guidance: "",
+    example: ""
+  },
+  "linkage.similarToDatasets": {
+    label: "Similar To Datasets",
+    guidance: "",
+    example: ""
   },
   "structuralMetadata.tables": {
     label: "Tables",
@@ -310,6 +330,28 @@ export const OPTIONS = {
   inPipeline:             ["Available", "Not available"],
   materialType:           ["Not available","Bone marrow","Cancer cell lines","CDNA/MRNA","Core biopsy","DNA","Entire body organ","Faeces","Immortalized cell lines","Isolated pathogen","MicroRNA","Peripheral blood cells","Plasma","PM Tissue","Primary cells","RNA","Saliva","Serum","Swabs","Tissue","Urine","Whole blood","Availability to be confirmed","Other"],
   followUp:               ["0 - 6 Months","6 - 12 Months","1 - 10 Years","> 10 Years","Unknown","Continuous","Other"],
+  demographicAgeRange:    ["0-6 days","7-27 days","1-11 months","1-4 years","5-9 years","10-14 years","15-19 years","20-24 years","25-29 years","30-34 years","35-39 years","40-44 years","45-49 years","50-54 years","55-59 years","60-64 years","65-69 years","70-74 years","75-79 years","80-84 years","85-89 years","90-94 years","95-99 years","100+ years"],
+  demographicEthnicGrouping: [
+                            "White - British",
+                            "White - Irish",
+                            "White - Any other White background",
+                            "Mixed - White and Black Caribbean",
+                            "Mixed - White and Black African",
+                            "Mixed - White and Asian",
+                            "Mixed - Any other mixed background",
+                            "Asian or Asian British - Indian",
+                            "Asian or Asian British - Pakistani",
+                            "Asian or Asian British - Bangladeshi",
+                            "Asian or Asian British - Any other Asian background",
+                            "Black or Black British - Caribbean",
+                            "Black or Black British - African",
+                            "Black or Black British - Any other Black background",
+                            "Other Ethnic Groups - Chinese",
+                            "Other Ethnic Groups - Any other ethnic group",
+                            "Not stated",
+                            "Not known"
+                          ],
+  demographicDiseaseCodes: ["ICD10","SNOMED CT","MeSH"],                
   purpose:                ["Research cohort","Study","Disease registry","Trial","Care","Audit","Administrative","Financial","Statutory","Other"],
   datasetType:            ["Health and disease","Treatments/Interventions","Measurements/Tests","Imaging types","Genomics","Digital health","Administrative","Socioeconomic","Other"],
   source:                 ["EPR","Electronic survey","LIMS","Paper-based","Free text NLP","Machine generated","Other"],

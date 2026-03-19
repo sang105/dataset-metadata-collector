@@ -5,7 +5,7 @@ export function createInitialState() {
         summary: {
             title: "", abstract: "", contactPoint: "", populationSize: "",
             keywords: [], doiName: "", datasetAliases: "",
-            custodian: { identifier: "", name: "", logo: "", description: "", contactPoint: "", memberOf: "" }
+            dataCustodian: { identifier: "", name: "", logo: "", description: "", contactPoint: "", memberOf: "" }
         },
         documentation: {
             description: "", associatedMedia: "", inPipeline: ""
@@ -24,7 +24,8 @@ export function createInitialState() {
             formatAndStandards: { vocabularyEncodingScheme: [], conformsTo: [], language: "", format: "" }
         },
         linkage: {
-            investigations: "", tools: "", publicationAboutDataset: "", publicationUsingDataset: ""
+            investigations: "", tools: "", publicationAboutDataset: "", publicationUsingDataset: "",
+            derivedFrom: [], isPartOf: [], linkableDatasets: [], similarToDatasets: []
         },
         structuralMetadata: { tables: [], syntheticDataWebLink: "" },
         observations: [],

@@ -23,13 +23,13 @@ export function StructuralMetadataFormLayout() {
     const iSt = { ...S.input, fontSize: 12}
 
     return (
-    <SectionShell icon="◓" label="Structural Metadata" color="#14B8A6">
+    <SectionShell label="Structural Metadata" color="#14B8A6">
       <Field path="structuralMetadata.syntheticDataWebLink" label="Synthetic Data Web Link" type="url" placeholder="https://…" />
 
       {/* Tables header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
         <span style={S.subheading}>Tables ({tables.length})</span>
-        <button onClick={h.addTable} style={{ background: "#14B8A611", border: "1px solid #14B8A633", color: "#14B8A6", borderRadius: 7, padding: "5px 14px", fontSize: 12, cursor: "pointer", fontFamily: "'DM Mono', monospace" }}>+ Add Table</button>
+        <button onClick={h.addTable} style={{ background: "#14B8A611", border: "1px solid #14B8A633", color: "#14B8A6", borderRadius: 7, padding: "5px 14px", fontSize: 12, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>+ Add Table</button>
       </div>
 
       {tables.length === 0 && (
@@ -39,12 +39,12 @@ export function StructuralMetadataFormLayout() {
       )}
 
       {tables.map(table => (
-        <div key={table.id} style={{ border: "1px solid #1E2D45", borderRadius: 10, padding: 16, marginBottom: 14, background: "#070F1C" }}>
+        <div key={table.id} style={{ border: "1px solid #FFF", borderRadius: 10, padding: 16, marginBottom: 14, background: "#FFF" }}>
           {/* Table header row */}
           <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
             <input value={table.name}        onChange={e => h.updateTable(table.id, "name",        e.target.value)} placeholder="Table name"        style={{ ...iSt, flex: 1 }} />
             <input value={table.description} onChange={e => h.updateTable(table.id, "description", e.target.value)} placeholder="Table description" style={{ ...iSt, flex: 2 }} />
-            <button onClick={() => h.removeTable(table.id)} style={S.removeBtn} title="Remove table">×</button>
+            <button onClick={() => h.removeTable(table.id)} style={S.removeBtn} title="Remove table">Remove</button>
           </div>
 
           {/* Columns */}
@@ -55,17 +55,27 @@ export function StructuralMetadataFormLayout() {
             {table.columns.length > 0 && (
               <div style={{ display: "grid", gridTemplateColumns: "1fr 100px 1.6fr 80px 36px", gap: 6, marginBottom: 4 }}>
                 {["Name", "Data Type", "Description", "Sensitive", ""].map(h => (
-                  <span key={h} style={{ fontSize: 9, color: "#1E2D45", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'DM Mono', monospace" }}>{h}</span>
+                  <span key={h} style={{ fontSize: 9, color: "#1E2D45", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'DM Sans', sans-serif" }}>{h}</span>
                 ))}
               </div>
             )}
 
             {table.columns.map(col => (
-              <div key={col.id} style={{ display: "grid", gridTemplateColumns: "1fr 100px 1.6fr 80px 36px", gap: 6, marginBottom: 6, alignItems: "center" }}>
-                <input value={col.name}        onChange={e => h.updateColumn(table.id, col.id, "name",        e.target.value)} placeholder="column_name"  style={iSt} />
-                <input value={col.dataType}    onChange={e => h.updateColumn(table.id, col.id, "dataType",    e.target.value)} placeholder="varchar"       style={iSt} />
+              <div key={col.id} style={{ display: "grid", gridTemplateColumns: "1fr 120px 1.6fr 80px 36px", gap: 6, marginBottom: 6, alignItems: "center" }}>
+                <input value={col.name} onChange={e => h.updateColumn(table.id, col.id, "name", e.target.value)} placeholder="column_name"  style={iSt} />
+                <select 
+                  style={iSt} 
+                  value={col.dataType}
+                  onChange={e => h.updateColumn(table.id, col.id, "dataType", e.target.value)}
+                >
+                  <option value="" disabled>Select..</option>
+                  <option>VARCHAR</option>
+                  <option>INT</option>
+                  <option>DATE</option>
+                  <option>BOOLEAN</option>
+                </select>
                 <input value={col.description} onChange={e => h.updateColumn(table.id, col.id, "description", e.target.value)} placeholder="Description"   style={iSt} />
-                <label style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#64748B", cursor: "pointer" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#64748B", cursor: "pointer" }}>
                   <input type="checkbox" checked={col.sensitive} onChange={e => h.updateColumn(table.id, col.id, "sensitive", e.target.checked)} style={{ accentColor: "#EF4444" }} />
                   Sensitive
                 </label>
@@ -73,7 +83,7 @@ export function StructuralMetadataFormLayout() {
               </div>
             ))}
 
-            <button onClick={() => h.addColumn(table.id)} style={{ ...S.addBtn, marginTop: 6, fontSize: 11 }}>+ Add Column</button>
+            <button onClick={() => h.addColumn(table.id)} style={{ ...S.addBtn, marginTop: 6, fontSize: 11, color: "#14B8A6", border: "1px dotted rgba(20, 184, 166, 0.2)", background: "#14B8A611" }}>+ Add Column</button>
           </div>
         </div>
       ))}
