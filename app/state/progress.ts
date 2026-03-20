@@ -46,14 +46,5 @@ export function computeOverallPct(map: ProgressMap): number {
     const vals = Object.values(map);
     
     if (vals.length === 0) return 0;
-    let vale = vals.reduce((s) => s ) 
-    // console.log(vale);
-    
-    let valet = vals.reduce((s,v) => s+v.pct,0 ) 
-    // console.log(valet);
-    
-    let value = Math.round(vals.reduce((s, v) => s + v.pct, 0) / vals.length)
-    // console.log(value);
-    
     return Math.round(vals.reduce((s, v) => s + v.pct, 0) / vals.length)
 }

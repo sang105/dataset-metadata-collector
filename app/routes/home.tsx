@@ -1,5 +1,10 @@
 import { Link } from "react-router"
-import { SECTIONS } from "~/constants/schema"
+
+export function meta() {
+    return [{
+        title: "Home"
+    }]
+}
 
 export default function Home() {
   return (
@@ -26,6 +31,9 @@ export default function Home() {
             </li>
             <li>
               The progress map is tracked by the number of required fields filled per section.
+            </li>
+            <li>
+              A few sections have <span className="text-red-600 font-semibold">required *</span> fields set as read-only with default values, this reflects on progress map by default.
             </li> 
             <li>
               Once all the required fields per section are filled the progress map will display a <span className="font-semibold text-green-600">100%</span>.
