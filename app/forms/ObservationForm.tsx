@@ -35,25 +35,25 @@ export function ObservationFormLayout() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div>
-                <label style={S.label}>Dataset Volume Measure</label>
+                <label style={S.label}>Dataset Volume Measure <span style={S.required}>*</span></label>
                 <select value={o.observedNode} onChange={e => upd("observedNode", e.target.value)} style={{ ...S.input, cursor: "pointer" }} required>
                   <option value="">Select…</option>
                   {OPTIONS.observedNode.map(v => <option key={v} value={v}>{v}</option>)}
                 </select>
               </div>
               <div>
-                <label style={S.label}>Measured Property</label>
+                <label style={S.label}>Measured Property <span style={S.required}>*</span></label>
                 <select value={o.measuredProperty} onChange={e => upd("measuredProperty", e.target.value)} style={{ ...S.input, cursor: "pointer" }} required>
                   <option value="">Select…</option>
                   {OPTIONS.measuredProperty.map(v => <option key={v} value={v}>{v}</option>)}
                 </select>
               </div>
               <div>
-                <label style={S.label}>Measured Value</label>
+                <label style={S.label}>Measured Value <span style={S.required}>*</span></label>
                 <input type="number" value={o.measuredValue} onChange={e => upd("measuredValue", e.target.value)} placeholder="1000000" style={S.input} required />
               </div>
               <div>
-                <label style={S.label}>Observation Date</label>
+                <label style={S.label}>Observation Date <span style={S.required}>*</span></label>
                 <input type="date" value={o.observationDate} onChange={e => upd("observationDate", e.target.value)} style={S.input} required />
               </div>
             </div>

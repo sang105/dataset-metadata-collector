@@ -7,7 +7,7 @@ interface DemoSectionProps {
     category: DemoCategory;
     title: string;
     color: string;
-    fields: { key: string; placeholder: string; type?: string; options?: {} }[];
+    fields: { key: string; placeholder: string; type?: string; options?: {}, required?: boolean }[];
 }
 
 export function DemoSection({ category, title, color, fields }: DemoSectionProps) {
@@ -39,7 +39,10 @@ export function DemoSection({ category, title, color, fields }: DemoSectionProps
             const options = f.options
             return (
             <div key={f.key}>
-              {i === 0 && <label style={{ ...S.label, marginBottom: 4 }}>{f.placeholder}</label>}
+              {i === 0 && <label style={{ ...S.label, marginBottom: 4 }}>
+                {f.placeholder}
+                {f.required && <span style={S.required}>*</span>}
+                </label>}
               {f.type === "select" ? (
                 <select 
                     name="" 
@@ -47,7 +50,6 @@ export function DemoSection({ category, title, color, fields }: DemoSectionProps
                     value={entry[f.key] || ""}
                     onChange={ev => dispatch({ type: "UPDATE_DEMO", category, id: Number(entry.id), field: f.key, value: ev.target.value })}
                     style={{ ...S.input, fontSize: 12 }}
-                    required
                 >
                     <option
                         value=""

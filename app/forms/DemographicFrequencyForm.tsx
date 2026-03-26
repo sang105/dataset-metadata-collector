@@ -10,8 +10,8 @@ export function DemographicFrequencyFormLayout() {
         title="Demographic Frequency Age"
         color="#F97316"
         fields={[
-          { key: "bin",   placeholder: "Select Age Grouping", type: "select", options: OPTIONS.demographicAgeRange },
-          { key: "count", placeholder: "Age Count", type: "number" },
+          { key: "bin",   placeholder: "Select Age Grouping", type: "select", options: OPTIONS.demographicAgeRange, required: true },
+          { key: "count", placeholder: "Age Count", type: "number", required: true },
         ]}
       />
 
@@ -22,8 +22,8 @@ export function DemographicFrequencyFormLayout() {
         title="Demographic Frequency Ethnicity"
         color="#F97316"
         fields={[
-          { key: "bin",   placeholder: "Select Ethnicity Grouping", type: "select", options: OPTIONS.demographicEthnicGrouping },
-          { key: "count", placeholder: "Ethnicity Count", type: "number" },
+          { key: "bin",   placeholder: "Select Ethnicity Grouping", type: "select", options: OPTIONS.demographicEthnicGrouping, required:true },
+          { key: "count", placeholder: "Ethnicity Count", type: "number", required:true },
         ]}
       />
 
@@ -34,9 +34,9 @@ export function DemographicFrequencyFormLayout() {
         title="Demographic Frequency Disease"
         color="#F97316"
         fields={[
-          { key: "diseaseCode",           placeholder: "Disease code)" },
-          { key: "diseaseCodeVocabulary",  placeholder: "Select Disease code and Vocabulary", type: "select", options: OPTIONS.demographicDiseaseCodes },
-          { key: "count",                  placeholder: "Count", type: "number" },
+          { key: "diseaseCode",           placeholder: "Disease code)", required:true },
+          { key: "diseaseCodeVocabulary",  placeholder: "Select Disease code and Vocabulary", type: "select", options: OPTIONS.demographicDiseaseCodes, required:true },
+          { key: "count",                  placeholder: "Count", type: "number", required:true },
         ]}
       />
     </SectionShell>

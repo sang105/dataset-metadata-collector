@@ -363,7 +363,7 @@ export const OPTIONS = {
   deliveryLeadTime:       ["Less than 1 week","1-2 weeks","2-4 weeks","1-2 months","2-6 months","6 months - 1 year","More than 1 year","Variable","Not applicable"],
   vocabularyEncodingScheme: ['LOCAL','OPCS4','READ','SNOMED CT','SNOMED RT','DM PLUS D','DM+D','NHS NATIONAL CODES','NHS SCOTLAND NATIONAL CODES','NHS WALES NATIONAL CODES','ODS','LOINC','ICD10','ICD10CM','ICD10PCS','ICD9CM','ICD9','ICDO3','AMT','APC','ATC','CIEL','HPO','CPT4','DPD','DRG','HEMONC','JMDC','KCD7','MULTUM','NAACCR','NDC','NDFRT','OXMIS','RXNORM','RXNORM EXTENSION','SPL','OTHER'],
   conformsTo:             ['HL7 FHIR','HL7 V2','HL7 CDA','HL7 CCOW','LOINC','DICOM','I2B2','IHE','OMOP','OPENEHR','SENTINEL','PCORNET','CDISC','NHS DATA DICTIONARY','NHS SCOTLAND DATA DICTIONARY','NHS WALES DATA DICTIONARY','LOCAL','OTHER'],
-  observedNode:           ["PERSONS","EVENTS","FINDINGS","BIOSAMPLES","IMAGING STUDIES","OTHER"],
+  observedNode:           ["PERSONS","EVENTS","FINDINGS","NUMBER OF SCANS PER MODALITY"],
   measuredProperty:       ["COUNT","MEAN","MEDIAN","PERCENTAGE","MIN","MAX","STANDARD DEVIATION","OTHER"],
 } as const;
 

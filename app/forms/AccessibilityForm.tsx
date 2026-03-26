@@ -13,7 +13,7 @@ export function AccessibilityFormLayout() {
       <Field path="accessibility.access.accessRights" label="Access Rights"  type="textarea" required placeholder="https://…/access" />
       <Field path="accessibility.access.accessService"        label="Access Service Description" type="textarea" rows={4} placeholder="Describe the data access service and environment available to researchers…" />
       <Grid2>
-        <Field path="accessibility.access.accessServiceCategory" label="Access Service Category" type="select" options={["TRE/SDE","Dataset","Researcher-facing API","Data Controller"]} />
+        <Field path="accessibility.access.accessServiceCategory" label="Access Service Category" type="select" options={['TRE/SDE','Direct access','Open access','Varies based on project']} />
         <Field path="accessibility.access.deliveryLeadTime"     label="Delivery Lead Time"      type="select"  options={OPTIONS.deliveryLeadTime} />
       </Grid2>
       <Field path="accessibility.access.accessRequestCost"    label="Access Request Cost"      placeholder="Free at point of access for approved academic researchers…" />
@@ -25,7 +25,7 @@ export function AccessibilityFormLayout() {
 
       <SubSection title="Format & Standards" color="#EF4444" />
       <Field path="accessibility.formatAndStandards.vocabularyEncodingScheme" label="Controlled Vocabulary" required type="multiselect" options={OPTIONS.vocabularyEncodingScheme} />
-      <Field path="accessibility.formatAndStandards.conformsTo"               label="Conforms To"               type="multiselect" options={OPTIONS.conformsTo} />
+      <Field path="accessibility.formatAndStandards.conformsTo"               label="Conforms To"    required           type="multiselect" options={OPTIONS.conformsTo} />
       <Grid2>
         <Field path="accessibility.formatAndStandards.language" label="Language (ISO 639-1)" required placeholder="en, cy, gd…" />
         <Field path="accessibility.formatAndStandards.format"   label="Format(s)" required placeholder="CSV, JSON, SQL…" />
