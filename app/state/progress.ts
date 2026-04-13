@@ -4,10 +4,11 @@ const TRACKED: Record<string, string[]> = {
     summary: ["summary.title","summary.abstract","summary.contactPoint","summary.populationSize", "summary.dataCustodian.name","summary.dataCustodian.contactPoint"],
     documentation: ["documentation.description"],
     coverage: ["coverage.spatial"],
-    provenance: ["provenance.origin.datasetType", "provenance.temporal.publishingFrequency","provenance.temporal.startDate", "provenance.temporal.timeLag"],
+    provenance: ["provenance.origin.datasetType", "provenance.origin.imageContrast", "provenance.temporal.publishingFrequency","provenance.temporal.startDate", "provenance.temporal.timeLag"],
     accessibility: ["accessibility.access.accessRights","accessibility.formatAndStandards.vocabularyEncodingScheme", "accessibility.formatAndStandards.language", "accessibility.formatAndStandards.format", "accessibility.formatAndStandards.conformsTo"],
-    linkage: ["linkage.investigations","linkage.tools"],
+    enrichmentAndLinkage: ["enrichmentAndLinkage.investigations","enrichmentAndLinkage.tools"],
     structuralMetadata: ["_tables"],
+    omics: ["omics.assay", "omics.platform"]
 }
 
 const OBSERVATION_REQUIRED_FIELDS = [

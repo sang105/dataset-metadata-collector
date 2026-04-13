@@ -12,5 +12,6 @@ export default [
         route("structural-metadata", "routes/structural-metadata.tsx"),
         route("observations", "routes/observation.tsx"),
         route("demographic-frequency", "routes/demographic-frequency.tsx"),
+        route("omics", "routes/omics.tsx")
     ])
 ] satisfies RouteConfig;

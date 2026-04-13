@@ -131,11 +131,19 @@ export function useGuidance() {
 export function useFormActions() {
   const { state, dispatch } = useForm();
 
+  const revisions = [
+    {
+        version: "1.0.0",
+        url: null
+    }
+  ]
+
   const exportJson = useCallback(() => {
     const { ...clean } = state as unknown as Record<string, unknown>;
     const out = {
       identifier: typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
       version: "1.0.0",
+      revisions: revisions,
       issued:  new Date().toISOString(),
       modified: new Date().toISOString(),
       ...clean,

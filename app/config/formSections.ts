@@ -5,7 +5,7 @@ export const formSections = [
   { id: "coverage", label: "Coverage" },
   { id: "provenance", label: "Provenance" },
   { id: "accessibility", label: "Accessibility" },
-  { id: "linkage", label: "Linkage" },
+  { id: "linkage", label: "Enrichment and Linkage" },
   { id: "structural", label: "Structural Metadata" },
   { id: "observations", label: "Observations" },
   { id: "demographics", label: "Demographic Frequency" }

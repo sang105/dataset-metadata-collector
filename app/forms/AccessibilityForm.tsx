@@ -27,8 +27,20 @@ export function AccessibilityFormLayout() {
       <Field path="accessibility.formatAndStandards.vocabularyEncodingScheme" label="Controlled Vocabulary" required type="multiselect" options={OPTIONS.vocabularyEncodingScheme} />
       <Field path="accessibility.formatAndStandards.conformsTo"               label="Conforms To"    required           type="multiselect" options={OPTIONS.conformsTo} />
       <Grid2>
-        <Field path="accessibility.formatAndStandards.language" label="Language (ISO 639-1)" required placeholder="en, cy, gd…" />
-        <Field path="accessibility.formatAndStandards.format"   label="Format(s)" required placeholder="CSV, JSON, SQL…" />
+        <Field 
+          path="accessibility.formatAndStandards.language" 
+          label="Language (ISO 639-1)" 
+          required
+          type="tags"
+          placeholder="en, cy, gd…" 
+        />
+        <Field 
+          path="accessibility.formatAndStandards.format"   
+          label="Format(s)" 
+          required
+          type="tags"
+          placeholder="CSV, JSON, SQL…" 
+        />
       </Grid2>
     </SectionShell>
     )

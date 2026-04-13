@@ -6,10 +6,32 @@ import { LinkageSection } from "~/ui/LinkageEditor";
 export function LinkageFormLayout() {
     return (
     <SectionShell label="Enrichment and Linkage" color="#EC4899">
-      <Field path="linkage.investigations"   label="Investigations"  required  type="textarea" rows={3} placeholder="Links to journal articles, presentations, or references that support discovery of the dataset…" />
-      <Field path="linkage.tools"    label="Tools"  required  type="textarea" rows={3} placeholder="Links to tools or resources useful for researchers using this dataset…" />
-      <Field path="linkage.publicationAboutDataset"  label="Publications About The Dataset" type="textarea" rows={3} placeholder="DOIs or URLs of publications that describe this dataset…" />
-      <Field path="linkage.publicationUsingDataset"  label="Publications Using The Dataset" type="textarea" rows={3} placeholder="DOIs or URLs of publications that used data from this dataset…" />
+      <Field 
+        path="enrichmentAndLinkage.investigations"   
+        label="Investigations"  
+        required  
+        type="tags" 
+        placeholder="Links to journal articles, presentations, or references that support discovery of the dataset…" 
+      />
+      <Field 
+        path="enrichmentAndLinkage.tools"    
+        label="Tools"  
+        required  
+        type="tags"
+        placeholder="Links to tools or resources useful for researchers using this dataset…" 
+      />
+      <Field 
+        path="enrichmentAndLinkage.publicationAboutDataset"  
+        label="Publications About The Dataset" 
+        type="tags" 
+        placeholder="DOIs or URLs of publications that describe this dataset…" 
+      />
+      <Field 
+        path="enrichmentAndLinkage.publicationUsingDataset"  
+        label="Publications Using The Dataset" 
+        type="tags"
+        placeholder="DOIs or URLs of publications that used data from this dataset…" 
+      />
       
       
       <LinkageSection

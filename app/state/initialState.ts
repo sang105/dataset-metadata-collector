@@ -3,32 +3,33 @@
 export function createInitialState() {
     return {
         summary: {
-            title: "", abstract: "", contactPoint: "", populationSize: "",
-            keywords: [], doiName: "", datasetAliases: "",
-            dataCustodian: { identifier: "", name: "", logo: "", description: "", contactPoint: "", memberOf: "" }
+            title: [], abstract: [], contactPoint: [], populationSize: "",
+            keywords: [], doiName: null, datasetAliases: null,
+            dataCustodian: { identifier: "", name: [], logo: null, description: null, contactPoint: "", memberOf: null }
         },
         documentation: {
-            description: "", associatedMedia: "", inPipeline: ""
+            description: [], associatedMedia: null, inPipeline: null
         },
         coverage: {
-            spatial: "", typicalAgeRangeMin: "", typicalAgeRangeMax: "",
-            datasetCompleteness: "", materialType: [], followUp: "", pathway: ""
+            spatial: null, typicalAgeRangeMin: "", typicalAgeRangeMax: "",
+            datasetCompleteness: null, materialType: [], followUp: null, pathway: null
         },
         provenance: {
-            origin: { purpose: [], datasetType: [], source: [], collectionSource: [], imageContrast: "" },
-            temporal: { publishingFrequency: "", distributionReleaseDate: "", startDate: "", endDate: "", timeLag: "" },
+            origin: { purpose: [], datasetType: [], source: [], collectionSource: [], imageContrast: null },
+            temporal: { publishingFrequency: "", distributionReleaseDate: null, startDate: null, endDate: null, timeLag: "" },
         },
         accessibility: {
-            usage: { dataUseLimitation: [], dataUseRequirements: [], resourceCreator: "" },
-            access: { accessRights: "", accessServiceCategory: "", accessService: "", accessRequestCost: "", deliveryLeadTime: "", jurisdiction: "", dataController: "", dataProcessor: "" },
-            formatAndStandards: { vocabularyEncodingScheme: [], conformsTo: [], language: "", format: "" }
+            usage: { dataUseLimitation: [], dataUseRequirements: [], resourceCreator: null },
+            access: { accessRights: "", accessServiceCategory: null, accessService: null, accessRequestCost: null, deliveryLeadTime: null, jurisdiction: "", dataController: null, dataProcessor: null },
+            formatAndStandards: { vocabularyEncodingScheme: [], conformsTo: [], language: [], format: [] }
         },
-        linkage: {
-            investigations: "", tools: "", publicationAboutDataset: "", publicationUsingDataset: "",
+        enrichmentAndLinkage: {
+            investigations: [], tools: [], publicationAboutDataset: [], publicationUsingDataset: [],
             derivedFrom: [], isPartOf: [], linkableDatasets: [], similarToDatasets: []
         },
-        structuralMetadata: { tables: [], syntheticDataWebLink: "" },
+        structuralMetadata: { tables: [], syntheticDataWebLink: [] },
         observations: [],
-        demographicFrequency: { age: [], ethnicity: [], disease: [] }
+        demographicFrequency: { age: [], ethnicity: [], disease: [] },
+        omics: { assay: null, platform: null }
     }
 }

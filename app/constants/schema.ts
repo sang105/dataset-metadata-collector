@@ -11,10 +11,11 @@ export const SECTIONS = [
   { id: "coverage", label: "Coverage", route: "coverage", icon: "◉", color: "#10B981", short: "COV" },
   { id: "provenance", label: "Provenance", route: "provenance", icon: "◐", color: "#F59E0B", short: "PRV" },
   { id: "accessibility", label: "Accessibility", route: "accessibility", icon: "◑", color: "#EF4444", short: "ACC" },
-  { id: "linkage", label: "Enrichment and Linkage", route: "enrichment-and-linkage", icon: "◒", color: "#EC4899", short: "LNK" },
+  { id: "enrichmentAndLinkage", label: "Enrichment and Linkage", route: "enrichment-and-linkage", icon: "◒", color: "#EC4899", short: "LNK" },
   { id: "structuralMetadata", label: "Structural Metadata", route: "structural-metadata",  icon: "◓", color: "#14B8A6", short: "STR" },
   { id: "observations", label: "Observations", route: "observations", icon: "⬡", color: "#6366F1", short: "OBS" },
   { id: "demographicFrequency",label: "Demographic Frequency",  route: "demographic-frequency",icon: "⬢", color: "#F97316", short: "DEM" },
+  { id: "omics", label: "Omics", route: "omics", icon: "※", color: "#8B8000", short: "OMI"}
 ] as const;
 
 export type SectionId = typeof SECTIONS[number]["id"];
@@ -26,10 +27,11 @@ export const SECTION_DESCRIPTIONS: Record<SectionId, string> = {
   coverage:             "Coverage describes the geographical, demographic and temporal scope of your dataset to help researchers understand its relevance.",
   provenance:           "Provenance allows researchers to understand the origins of your data — why and how it was collected, and its temporal characteristics.",
   accessibility:        "Accessibility covers data use limitations, access processes, costs, jurisdiction and technical standards used in the dataset.",
-  linkage:              "Linkage (Enrichment) describes relationships between this and other datasets — derived from, part of, linkable, or similar to.",
+  enrichmentAndLinkage: "Linkage (Enrichment) describes relationships between this and other datasets — derived from, part of, linkable, or similar to.",
   structuralMetadata:   "Structural metadata defines the table and column structure of the dataset — names, data types, descriptions and sensitive fields.",
   observations:         "Observations capture statistical summaries about the dataset such as number of persons, events or findings.",
   demographicFrequency: "Demographic frequency provides distribution data across age, ethnicity and disease classifications within the dataset.",
+  omics:                "Omics provides information about the omics methods used to generate the dataset. The fields can be left blank if dataset has nothing regards omics."
 };
 
 // ── Field guidance registry (HDR UK v4.0.0 spec) ─────────────
@@ -162,6 +164,11 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
     guidance: "Indicate the setting(s) where data was collected. Multiple settings may be provided.",
     example: "Secondary care - In-patients",
   },
+  "provenance.origin.imageContrast": {
+    label: "Image Contrast",
+    guidance: "If any contrast media or contrast agents were used in creating the images within the dataset and the contrast is known, mark 'Yes'. If this information is not known or not captured, indicate 'Not stated'. If there was no contrast used in the images, mark 'No'.",
+    example: "Not stated",
+  },
   "provenance.temporal.publishingFrequency": {
     label: "Publishing Frequency",
     guidance: "How frequently are updates published? 'Static' means the dataset is not updated. 'Continuous' means updated in real time or near-real time.",
@@ -239,50 +246,50 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
   },
   "accessibility.formatAndStandards.language": {
     label: "Language",
-    guidance: "This should reflect the language in which the metadata, and ideally the underlying dataset, is held. Use ISO 639-1 language codes.",
+    guidance: "This should reflect the language in which the metadata, and ideally the underlying dataset, is held. Use ISO 639-1 language codes. Please click add button to add value.",
     example: "en",
   },
   "accessibility.formatAndStandards.format": {
     label: "Format",
-    guidance: "List all possible formats that the dataset can be made available in. Multiple values are allowed.",
+    guidance: "List all possible formats that the dataset can be made available in. Multiple values are allowed. Please click add button to add value.",
     example: "CSV, JSON, SQL",
   },
-  "linkage.investigations": {
+  "enrichmentAndLinkage.investigations": {
     label: "Investigations",
-    guidance: "Links to any journal articles, presentations, or references that support the discovery and understanding of the dataset.",
+    guidance: "Links to any journal articles, presentations, or references that support the discovery and understanding of the dataset. Please, only provide URLs for this field. Please click add button to add value.",
     example: "https://link.to/paper.pdf",
   },
-  "linkage.tools": {
+  "enrichmentAndLinkage.tools": {
     label: "Tools",
-    guidance: "Links to tools or resources that may be useful to a researcher using this dataset.",
+    guidance: "Links to tools or resources that may be useful to a researcher using this dataset. Please, only provide URLs for this field. Please click add button to add value.",
     example: "https://link.to/tool",
   },
-  "linkage.publicationAboutDataset": {
+  "enrichmentAndLinkage.publicationAboutDataset": {
     label: "Publications About Dataset",
-    guidance: "DOIs or URLs of publications about this dataset.",
+    guidance: "DOIs of publications about this dataset. Please provide on the DOI as shown in the below example. Please click add button to add value.",
     example: "10.1093/ije/dyx196",
   },
-  "linkage.publicationUsingDataset": {
+  "enrichmentAndLinkage.publicationUsingDataset": {
     label: "Publications Using Dataset",
-    guidance: "DOIs or URLs of publications that have used data from this dataset.",
+    guidance: "DOIs of publications that have used data from this dataset. Please provide on the DOI as shown in the below example. Please click add button to add value.",
     example: "10.1016/S0140-6736(21)00143-8",
   },
-  "linkage.derivedFrom": {
+  "enrichmentAndLinkage.derivedFrom": {
     label: "Derived From",
     guidance: "",
     example: ""
   },
-  "linkage.isPartOf": {
+  "enrichmentAndLinkage.isPartOf": {
     label: "Is Part Of",
     guidance: "",
     example: ""
   },
-  "linkage.linkableDatasets": {
+  "enrichmentAndLinkage.linkableDatasets": {
     label: "Linkable Datasets",
     guidance: "",
     example: ""
   },
-  "linkage.similarToDatasets": {
+  "enrichmentAndLinkage.similarToDatasets": {
     label: "Similar To Datasets",
     guidance: "",
     example: ""
@@ -322,13 +329,23 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
     guidance: "Provide disease distribution data. Each entry should have a disease code, the coding vocabulary used (e.g. ICD10), and a count.",
     example: "I10 (ICD10 - Hypertension): 320,000",
   },
+  "omics.assay": {
+    label: "Omics Assay",
+    guidance: "Provide the specific omics assay that generated the dataset. If the assay used to generate your dataset is not listed, please contract the gateway team by submitting an enquiry.",
+    example: "Whole genome sequencing"
+  },
+  "omics.platform": {
+    label: "Omics Platform",
+    guidance: "Provide the specific technology or infrastructure used to perform the assay. If the omics platform used to create your dataset is not listed, please select other, a member of the gateway team will contact you to add an appropriate term(s) both to your record and to the metadata schema on your behalf.",
+    example: "Illumina"
+  }
 };
 
 // ── Option lists ───────────────────────────────────────────────
 export const OPTIONS = {
   memberOf:               ["Hub", "Alliance", "Other", "NCS"],
   inPipeline:             ["Available", "Not available"],
-  materialType:           ["Not available","Bone marrow","Cancer cell lines","CDNA/MRNA","Core biopsy","DNA","Entire body organ","Faeces","Immortalized cell lines","Isolated pathogen","MicroRNA","Peripheral blood cells","Plasma","PM Tissue","Primary cells","RNA","Saliva","Serum","Swabs","Tissue","Urine","Whole blood","Availability to be confirmed","Other"],
+  materialType:           ['None/not available','Bone marrow','Cancer cell lines','CDNA/MRNA','Core biopsy','DNA','Entire body organ','Faeces','Immortalized cell lines','Isolated pathogen','MicroRNA','Peripheral blood cells','Plasma','PM Tissue','Primary cells','RNA','Saliva','Serum','Swabs','Tissue','Urine','Whole blood','Availability to be confirmed','Other'],
   followUp:               ["0 - 6 Months","6 - 12 Months","1 - 10 Years","> 10 Years","Unknown","Continuous","Other"],
   demographicAgeRange:    ["0-6 days","7-27 days","1-11 months","1-4 years","5-9 years","10-14 years","15-19 years","20-24 years","25-29 years","30-34 years","35-39 years","40-44 years","45-49 years","50-54 years","55-59 years","60-64 years","65-69 years","70-74 years","75-79 years","80-84 years","85-89 years","90-94 years","95-99 years","100+ years"],
   demographicEthnicGrouping: [
@@ -353,7 +370,8 @@ export const OPTIONS = {
                           ],
   demographicDiseaseCodes: ["ICD10","SNOMED CT","MeSH"],                
   purpose:                ["Research cohort","Study","Disease registry","Trial","Care","Audit","Administrative","Financial","Statutory","Other"],
-  datasetType:            ["Health and disease","Treatments/Interventions","Measurements/Tests","Imaging types","Genomics","Digital health","Administrative","Socioeconomic","Other"],
+  datasetType:            ["Health and disease","Treatments/Interventions","Measurements/Tests","Imaging types","Omics","Digital health","Administrative","Socioeconomic","Other"],
+  imageContrast:          ["Yes", "No", "Not stated"],
   source:                 ["EPR","Electronic survey","LIMS","Paper-based","Free text NLP","Machine generated","Other"],
   collectionSource:       ["Cohort, study, trial","Clinic","Primary care - Referrals","Primary care - Clinic","Primary care - Out of hours","Secondary care - Accident and Emergency","Secondary care - Outpatients","Secondary care - In-patients","Secondary care - Ambulance","Secondary care - ICU","Prescribing - Community pharmacy","Prescribing - Hospital","Patient report outcome","Wearables","Local authority","National government","Community","Services","Home","Private","Social care - Health care at home","Social care - Other social data","Census","Other"],
   publishingFrequency:    ["Static","Irregular","Continuous","Biennial","Annual","Biannual","Quarterly","Bimonthly","Monthly","Biweekly","Weekly","Twice a week","Daily"],
@@ -363,8 +381,11 @@ export const OPTIONS = {
   deliveryLeadTime:       ["Less than 1 week","1-2 weeks","2-4 weeks","1-2 months","2-6 months","6 months - 1 year","More than 1 year","Variable","Not applicable"],
   vocabularyEncodingScheme: ['LOCAL','OPCS4','READ','SNOMED CT','SNOMED RT','DM PLUS D','DM+D','NHS NATIONAL CODES','NHS SCOTLAND NATIONAL CODES','NHS WALES NATIONAL CODES','ODS','LOINC','ICD10','ICD10CM','ICD10PCS','ICD9CM','ICD9','ICDO3','AMT','APC','ATC','CIEL','HPO','CPT4','DPD','DRG','HEMONC','JMDC','KCD7','MULTUM','NAACCR','NDC','NDFRT','OXMIS','RXNORM','RXNORM EXTENSION','SPL','OTHER'],
   conformsTo:             ['HL7 FHIR','HL7 V2','HL7 CDA','HL7 CCOW','LOINC','DICOM','I2B2','IHE','OMOP','OPENEHR','SENTINEL','PCORNET','CDISC','NHS DATA DICTIONARY','NHS SCOTLAND DATA DICTIONARY','NHS WALES DATA DICTIONARY','LOCAL','OTHER'],
+  language:               ['aa','ab','ae','af','ak','am','an','ar','as','av','ay','az','ba','be','bg','bh','bi','bm','bn','bo','br','bs','ca','ce','ch','co','cr','cs','cu','cv','cy','da','de','dv','dz','ee','el','en','eo','es','et','eu','fa','ff','fi','fj','fo','fr','fy','ga','gd','gl','gn','gu','gv','ha','he','hi','ho','hr','ht','hu','hy','hz','ia','id','ie','ig','ii','ik','io','is','it','iu','ja','jv','ka','kg','ki','kj','kk','kl','km','kn','ko','kr','ks','ku','kv','kw','ky','la','lb','lg','li','ln','lo','lt','lu','lv','mg','mh','mi','mk','ml','mn','mr','ms','mt','my','na','nb','nd','ne','ng','nl','nn','no','nr','nv','ny','oc','oj','om','or','os','pa','pi','pl','ps','pt','qu','rm','rn','ro','ru','rw','sa','sc','sd','se','sg','si','sk','sl','sm','sn','so','sq','sr','ss','st','su','sv','sw','ta','te','tg','th','ti','tk','tl','tn','to','tr','ts','tt','tw','ty','ug','uk','ur','uz','ve','vi','vo','wa','wo','xh','yi','yo','za','zh','zu'],
   observedNode:           ["PERSONS","EVENTS","FINDINGS","NUMBER OF SCANS PER MODALITY"],
   measuredProperty:       ["COUNT","MEAN","MEDIAN","PERCENTAGE","MIN","MAX","STANDARD DEVIATION","OTHER"],
+  assay:                  ['NMR spectroscopy','Mass-spectrometry','Whole genome sequencing','Exome sequencing','Genotyping by array','Transcriptome profiling by high-throughput sequencing','Transcriptome profiling by array','Amplicon sequencing','Methylation binding domain sequencing','Methylation profiling by high-throughput sequencing','Genomic variant calling','Chromatin accessibility profiling by high-throughput sequencing','Histone modification profiling by high-throughput sequencing','Chromatin immunoprecipitation sequencing','Whole genome shotgun sequencing','Whole transcriptome sequencing','Targeted mutation analysis'],
+  platform:               ['Other','NMR Nightingale','Metabolon','Biocrates','Illumina','Oxford Nanopore','454','Hi-C','HiFi']
 } as const;
 
 // ── Draft storage ─────────────────────────────────────────────

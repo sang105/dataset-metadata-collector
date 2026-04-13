@@ -1,54 +1,56 @@
 import type React from "react";
 
 export interface DataCustodian {
-  identifier: string;
-  name: string;
-  logo: string;
-  description: string;
+  identifier: string | number;
+  name: string[];
+  logo: string[] | null;
+  description: string[] | null;
   contactPoint: string;
-  memberOf: string;
+  memberOf: string[] | null;
 }
 
 export interface SummarySection {
-  title: string;
-  abstract: string;
-  contactPoint: string;
+  title: string[];
+  abstract: string[];
+  contactPoint: string[];
   populationSize: string;
   keywords: string[];
-  doiName: string;
-  datasetAliases: string;
+  doiName: string[] | null;
+  datasetAliases: string[] | null;
   dataCustodian: DataCustodian;
 }
 
 export interface DocumentationSection {
-  description: string;
-  associatedMedia: string;
-  inPipeline: string;
+  description: string[];
+  associatedMedia: string[] | null;
+  inPipeline: string[] | null;
 }
 
 export interface CoverageSection {
-  spatial: string;
+  spatial: string[] | null;
   typicalAgeRangeMin: string;
   typicalAgeRangeMax: string;
-  datasetCompleteness: string;
+  datasetCompleteness: string[] | null;
   materialType: string[];
-  followUp: string;
-  pathway: string;
+  followUp: string[] | null;
+  pathway: string[] | null;
 }
+
+export interface DatasetType {id: number; name: string; subTypes: string[]; }
 
 export interface ProvenanceSection {
   origin: {
     purpose: string[];
-    datasetType: string[];
+    datasetType: DatasetType[];
     source: string[];
     collectionSource: string[];
-    imageContrast: string;
+    imageContrast: string[] | null;
   };
   temporal: {
     publishingFrequency: string;
-    distributionReleaseDate: string;
-    startDate: string;
-    endDate: string;
+    distributionReleaseDate: string | null;
+    startDate: string | null;
+    endDate: string | null;
     timeLag: string;
   };
 }
@@ -57,23 +59,23 @@ export interface AccessibilitySection {
   usage: {
     dataUseLimitation: string[];
     dataUseRequirements: string[];
-    resourceCreator: string;
+    resourceCreator: string[] | null;
   };
   access: {
     accessRights: string;
-    accessServiceCategory: string;
-    accessService: string;
-    accessRequestCost: string;
-    deliveryLeadTime: string;
+    accessServiceCategory: string[] | null;
+    accessService: string[] | null;
+    accessRequestCost: string[] | null;
+    deliveryLeadTime: string[] | null;
     jurisdiction: string;
-    dataController: string;
-    dataProcessor: string;
+    dataController: string[] | null;
+    dataProcessor: string[] | null;
   };
   formatAndStandards: {
     vocabularyEncodingScheme: string[];
     conformsTo: string[];
-    language: string;
-    format: string;
+    language: string[];
+    format: string[];
   };
 }
 
@@ -83,10 +85,10 @@ export interface LinkableDatasetsEntry { id: number; identifier_of_dataset: stri
 export interface SimilarToDatasetsEntry { id: number; identifier_of_dataset: string; title_of_dataset: string; url_of_dataset: string }
 
 export interface LinkageSection {
-  investigations: string;
-  tools: string;
-  publicationAboutDataset: string;
-  publicationUsingDataset: string;
+  investigations: string[];
+  tools: string[];
+  publicationAboutDataset: string[];
+  publicationUsingDataset: string[];
   derivedFrom: DerivedFromEntry[];
   isPartOf: IsPartOfEntry[];
   linkableDatasets: LinkableDatasetsEntry[];
@@ -110,7 +112,7 @@ export interface DataTable {
 
 export interface StructuralMetadataSection {
   tables: DataTable[];
-  syntheticDataWebLink: string;
+  syntheticDataWebLink: string[];
 }
 
 export interface Observation {
@@ -134,16 +136,22 @@ export interface DemographicFrequencySection {
   disease:   DiseaseEntry[];
 }
 
+export interface OmicsSection {
+  assay: string[] | null,
+  platform: string[] | null
+}
+
 export interface FormState {
   summary: SummarySection;
   documentation: DocumentationSection;
   coverage: CoverageSection;
   provenance: ProvenanceSection;
   accessibility: AccessibilitySection;
-  linkage: LinkageSection;
+  enrichmentAndLinkage: LinkageSection;
   structuralMetadata: StructuralMetadataSection;
   observations: ObservationsSection;
   demographicFrequency: DemographicFrequencySection;
+  omics: OmicsSection;
 }
 
 export interface SectionProgress {
@@ -178,6 +186,10 @@ export type FormAction =
   | { type: "ADD_DEMO";        category: "age" | "ethnicity" | "disease" }
   | { type: "UPDATE_DEMO";     category: "age" | "ethnicity" | "disease"; id: number; field: string; value: string }
   | { type: "REMOVE_DEMO";     category: "age" | "ethnicity" | "disease"; id: number }
+  // DatasetType CRUD - toggle a type on/off; manage its subTypes
+  | { type: "TOGGLE_DATASET_TYPE", name: string }
+  | { type: "ADD_DATASET_SUBTYPE", id: number; subType: string }
+  | { type: "REMOVE_DATASET_SUBTYPE", id: number; subType: string }
 
 
 export interface FormContextValue {

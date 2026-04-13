@@ -34,17 +34,17 @@ export function formReducer(state: FormState, action: FormAction): FormState {
                 access: { ...fresh.accessibility.access, ...(action.payload.accessibility?.access ?? {}) },
                 formatAndStandards:{ ...fresh.accessibility.formatAndStandards, ...(action.payload.accessibility?.formatAndStandards ?? {}) },
                 },
-                linkage: { 
+                enrichmentAndLinkage: { 
                     // ...fresh.linkage, 
                     // ...(action.payload.linkage ?? {}) 
-                    investigations: action.payload.linkage?.investigations ?? fresh.linkage.investigations,
-                    tools: action.payload.linkage?.tools ?? fresh.linkage.tools,
-                    publicationAboutDataset: action.payload.linkage?.publicationAboutDataset ?? fresh.linkage.publicationAboutDataset,
-                    publicationUsingDataset: action.payload.linkage?.publicationUsingDataset ?? fresh.linkage.publicationUsingDataset,
-                    derivedFrom: action.payload.linkage?.derivedFrom ?? fresh.linkage.derivedFrom,
-                    isPartOf: action.payload.linkage?.isPartOf ?? fresh.linkage.isPartOf,
-                    linkableDatasets: action.payload.linkage?.linkableDatasets ?? fresh.linkage.linkableDatasets,
-                    similarToDatasets: action.payload.linkage?.similarToDatasets ?? fresh.linkage.similarToDatasets,
+                    investigations: action.payload.enrichmentAndLinkage?.investigations ?? fresh.enrichmentAndLinkage.investigations,
+                    tools: action.payload.enrichmentAndLinkage?.tools ?? fresh.enrichmentAndLinkage.tools,
+                    publicationAboutDataset: action.payload.enrichmentAndLinkage?.publicationAboutDataset ?? fresh.enrichmentAndLinkage.publicationAboutDataset,
+                    publicationUsingDataset: action.payload.enrichmentAndLinkage?.publicationUsingDataset ?? fresh.enrichmentAndLinkage.publicationUsingDataset,
+                    derivedFrom: action.payload.enrichmentAndLinkage?.derivedFrom ?? fresh.enrichmentAndLinkage.derivedFrom,
+                    isPartOf: action.payload.enrichmentAndLinkage?.isPartOf ?? fresh.enrichmentAndLinkage.isPartOf,
+                    linkableDatasets: action.payload.enrichmentAndLinkage?.linkableDatasets ?? fresh.enrichmentAndLinkage.linkableDatasets,
+                    similarToDatasets: action.payload.enrichmentAndLinkage?.similarToDatasets ?? fresh.enrichmentAndLinkage.similarToDatasets,
                 },
                 structuralMetadata:  { ...fresh.structuralMetadata, ...(action.payload.structuralMetadata  ?? {}) },
                 observations: action.payload.observations ?? fresh.observations,
@@ -52,7 +52,8 @@ export function formReducer(state: FormState, action: FormAction): FormState {
                     age: action.payload.demographicFrequency?.age ?? fresh.demographicFrequency.age,
                     ethnicity:action.payload.demographicFrequency?.ethnicity ?? fresh.demographicFrequency.ethnicity,
                     disease: action.payload.demographicFrequency?.disease ?? fresh.demographicFrequency.disease,
-                }
+                },
+                omics: {  ...fresh.omics, ...(action.payload.omics ?? {}) }
             }
         }
 
@@ -60,9 +61,9 @@ export function formReducer(state: FormState, action: FormAction): FormState {
             const entry =  { id: Date.now(), identifier_of_dataset: "", title_of_dataset: "", url_of_dataset: ""  }
             return {                
                 ...state,
-                linkage: {
-                    ...state.linkage,
-                    [action.category]: [...state.linkage[action.category], entry]
+                enrichmentAndLinkage: {
+                    ...state.enrichmentAndLinkage,
+                    [action.category]: [...state.enrichmentAndLinkage[action.category], entry]
                 }
             }
         }
@@ -70,9 +71,9 @@ export function formReducer(state: FormState, action: FormAction): FormState {
         case "UPDATE_LINKAGE_OPTS": {
             return {
                 ...state,
-                linkage: {
-                    ...state.linkage,
-                    [action.category]: (state.linkage[action.category] as { id: number}[]).map((e) =>
+                enrichmentAndLinkage: {
+                    ...state.enrichmentAndLinkage,
+                    [action.category]: (state.enrichmentAndLinkage[action.category] as { id: number}[]).map((e) =>
                         e.id === action.id ? { ...e, [action.field]: action.value } : e
                     )
                 }
@@ -82,9 +83,9 @@ export function formReducer(state: FormState, action: FormAction): FormState {
         case "REMOVE_LINKAGE_OPTS": {
             return {
                 ...state,
-                linkage: {
-                    ...state.linkage,
-                    [action.category]: (state.linkage[action.category] as { id: number }[]).filter(
+                enrichmentAndLinkage: {
+                    ...state.enrichmentAndLinkage,
+                    [action.category]: (state.enrichmentAndLinkage[action.category] as { id: number }[]).filter(
                         (e) => e.id !== action.id
                     )
                 }
@@ -212,6 +213,54 @@ export function formReducer(state: FormState, action: FormAction): FormState {
                     ),
                     },
                 };
+
+            // TOGGLE_DATASET_TYPE — adds the type if not present, removes it
+            // if already selected (same toggle pattern as MultiSelect).
+            // Each entry gets a unique id so subType CRUD can target it precisely.
+            case "TOGGLE_DATASET_TYPE": {
+                const existing = state.provenance.origin.datasetType;
+                const alreadySelected = existing.find(e => e.name === action.name)
+                const updated = alreadySelected ? existing.filter(e => e.name !== action.name) : [...existing, { id: Date.now(), name: action.name, subTypes: [] }]
+                return {
+                    ...state,
+                    provenance: {
+                        ...state.provenance,
+                        origin: { ...state.provenance.origin, datasetType: updated }
+                    }
+                }
+            }
+
+            // ADD_DATASET_SUBTYPE
+            case "ADD_DATASET_SUBTYPE": {
+                const updated = state.provenance.origin.datasetType.map(e =>
+                    e.id === action.id && !e.subTypes.includes(action.subType)
+                    ? { ...e, subTypes: [...e.subTypes, action.subType]}
+                    : e
+                )
+                return {
+                    ...state,
+                    provenance: {
+                        ...state.provenance,
+                        origin: { ...state.provenance.origin, datasetType: updated }
+                    }
+                }
+            }
+
+            // REMOVE_DATASET_SUBTYPE
+            case "REMOVE_DATASET_SUBTYPE": {
+                const updated = state.provenance.origin.datasetType.map(e => 
+                    e.id === action.id
+                    ? { ...e, subTypes: e.subTypes.filter(s => s !== action.subType) }
+                    : e
+                )
+                return {
+                    ...state,
+                    provenance: {
+                        ...state.provenance,
+                        origin: { ...state.provenance.origin, datasetType: updated }
+                    }
+                }
+            }
 
         case "RESET": 
             return createInitialState()

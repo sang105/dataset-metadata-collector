@@ -20,7 +20,7 @@ export default function Home() {
       </p>
 
        {/* border-[#020812]/90 bg-[#020812]/90 */}
-      <div className="flex mb-20 border w-full items-center xl:h-170 lg:h-260 sm:h-320  border-[#ECECEC] bg-[#ECECEC]">
+      <div className="flex mb-20 border w-full items-center xl:h-180 lg:h-300 sm:h-350  border-[#ECECEC] bg-[#ECECEC]">
         <div className="text-justify w-9/12 h-9/12 border bg-white border-white m-auto rounded-2xl ">
           <h3 className="p-4 my-2 mx-4 font-semibold text-lg text-[#020812]">
             Please note the following before filling the metadata collector form
@@ -43,6 +43,9 @@ export default function Home() {
             </li>
             <li>
               As the name implies, the overall progress map computes overall percentage for all filled sections.
+            </li>
+            <li>
+              Do note that some sections have input fields with <span className="border rounded-md px-2 text-white border-[#0EA5E9] bg-[#0EA5E9] text-sm font-sans">+ Add</span> buttons.  <span className="font-semibold">Click the button to add value typed in the field</span>.
             </li>
             <li>
               There are special cases on a few sections of the form e.g. Structural metadata, Observation, Demographic frequency.

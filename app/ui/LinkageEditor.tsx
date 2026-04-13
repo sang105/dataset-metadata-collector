@@ -12,7 +12,7 @@ interface LinkageSectionProps {
 
 export function LinkageSection({ category, fields, color, title }: LinkageSectionProps) {
     const { state, dispatch } = useForm()
-    const entries = state.linkage[category] as unknown as Record<string, string>[]    
+    const entries = state.enrichmentAndLinkage[category] as unknown as Record<string, string>[]    
 
     return (
       <div style={{ marginBottom: 28 }}>
