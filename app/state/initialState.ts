@@ -3,12 +3,12 @@
 export function createInitialState() {
     return {
         summary: {
-            title: [], abstract: [], contactPoint: [], populationSize: "",
+            title: "", abstract: "", contactPoint: "", populationSize: "",
             keywords: [], doiName: null, datasetAliases: null,
             dataCustodian: { identifier: "", name: [], logo: null, description: null, contactPoint: "", memberOf: null }
         },
         documentation: {
-            description: [], associatedMedia: null, inPipeline: null
+            description: "", associatedMedia: null, inPipeline: null
         },
         coverage: {
             spatial: null, typicalAgeRangeMin: "", typicalAgeRangeMax: "",

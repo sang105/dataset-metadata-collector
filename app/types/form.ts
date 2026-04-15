@@ -10,10 +10,10 @@ export interface DataCustodian {
 }
 
 export interface SummarySection {
-  title: string[];
-  abstract: string[];
-  contactPoint: string[];
-  populationSize: string;
+  title: string;
+  abstract: string;
+  contactPoint: string;
+  populationSize: number | string;
   keywords: string[];
   doiName: string[] | null;
   datasetAliases: string[] | null;
@@ -21,7 +21,7 @@ export interface SummarySection {
 }
 
 export interface DocumentationSection {
-  description: string[];
+  description: string;
   associatedMedia: string[] | null;
   inPipeline: string[] | null;
 }

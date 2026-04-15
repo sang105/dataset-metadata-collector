@@ -24,13 +24,13 @@ export function LinkageFormLayout() {
         path="enrichmentAndLinkage.publicationAboutDataset"  
         label="Publications About The Dataset" 
         type="tags" 
-        placeholder="DOIs or URLs of publications that describe this dataset…" 
+        placeholder="DOIs of publications that describe this dataset…" 
       />
       <Field 
         path="enrichmentAndLinkage.publicationUsingDataset"  
         label="Publications Using The Dataset" 
         type="tags"
-        placeholder="DOIs or URLs of publications that used data from this dataset…" 
+        placeholder="DOIs of publications that used data from this dataset…" 
       />
       
       

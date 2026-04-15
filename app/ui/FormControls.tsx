@@ -19,7 +19,7 @@ export const S = {
     letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif",
   },
   group: { marginBottom: 22 },
-  required: { color: "#F87171", marginLeft: 3 },
+  required: { color: "#FF0000", marginLeft: 3, fontSize: 15 },
   addBtn: {
     background: "none", border: "1px dashed #1E2D45", color: "#475569",
     cursor: "pointer", borderRadius: 8, padding: "6px 16px",
