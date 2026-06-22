@@ -15,17 +15,17 @@ export default function Home() {
       </h1>
 
       <p className="text-lg text-gray-700 mb-10 text-center">
-        This tool <span className="text-blue-600 font-sans font-bold">allows researchers to create dataset metadata and download as JSON</span> format <br></br>
+        This tool <span className="text-blue-600 font-sans font-bold">allows researchers to create dataset metadata and download output as JSON</span> format <br></br>
         compatible with the HDR UK Gateway platform.
       </p>
 
        {/* border-[#020812]/90 bg-[#020812]/90 */}
-      <div className="flex mb-20 border w-full items-center xl:h-180 lg:h-300 sm:h-350  border-[#ECECEC] bg-[#ECECEC]">
+      <div className="flex mb-10 border w-full items-center xl:h-180 lg:h-300 sm:h-350  border-[#ECECEC] bg-[#ECECEC]">
         <div className="text-justify w-9/12 h-9/12 border bg-white border-white m-auto rounded-2xl ">
           <h3 className="p-4 my-2 mx-4 font-semibold text-lg text-[#020812]">
             Please note the following before filling the metadata collector form
           </h3>
-          <ul className="p-4 mx-4 list-none text-gray-700 text-lg">
+          <ul className="pl-4 mx-4 list-none text-gray-700 text-lg">
             <li>
               Each section of the metadata collector form has a progress map.
             </li>
@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="my-1.5 text-center">
+      <div className="mb-10 text-center">
         <Link
           to="/summary"
           className="bg-blue-600 text-2xl font-semibold text-white px-6 py-3 rounded-lg shadow-md shadow-blue-600/50"

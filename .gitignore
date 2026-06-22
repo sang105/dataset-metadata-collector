@@ -5,3 +5,7 @@
 # React Router
 /.react-router/
 /build/
+
+# Ignore utils & cloudflare stuff
+/utils
+/cloudflare-worker

@@ -234,6 +234,11 @@ export const FIELD_GUIDANCE: Record<string, FieldGuidance> = {
     guidance: "The organisation that, alone or jointly with others, determines the purposes and means of the processing of personal data. Usually the organisation that collected the data.",
     example: "NIHR Bristol Biomedical Research Centre",
   },
+  "accessibility.access.dataProcessor": {
+    label: "Data Processor",
+    guidance: "The organisation that, alone or jointly with others, who processes the data on behalf of the data controller. Usually the organisation that collected the data.",
+    example: "NIHR Bristol Biomedical Research Centre",
+  },
   "accessibility.formatAndStandards.vocabularyEncodingScheme": {
     label: "Vocabulary Encoding Scheme",
     guidance: "List the controlled vocabularies, ontologies, terminologies or standards used in the dataset. Multiple values are allowed.",

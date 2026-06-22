@@ -19,9 +19,23 @@ export function AccessibilityFormLayout() {
       <Field path="accessibility.access.accessRequestCost"    label="Access Request Cost"      placeholder="Free at point of access for approved academic researchers…" />
       <Grid2>
         <Field path="accessibility.access.jurisdiction"        label="Jurisdiction"  placeholder="GB-ENG" />
-        <Field path="accessibility.access.dataController" label="Data Controller"  readOnly defaultValue="NIHR Bristol Biomedical Research Centre" />
+        <Field 
+          path="accessibility.access.dataController"
+          label="Data Controller" 
+          placeholder="NIHR Bristol Biomedical Research Centre"
+          required 
+          // readOnly 
+          // defaultValue="NIHR Bristol Biomedical Research Centre" 
+          />
       </Grid2>
-      <Field path="accessibility.access.dataProcessor" label="Data Processor" readOnly defaultValue="NIHR Bristol Biomedical Research Centre" />
+      <Field 
+        path="accessibility.access.dataProcessor" 
+        label="Data Processor" 
+        placeholder="NIHR Bristol Biomedical Research Centre"
+        required
+        // readOnly 
+        // defaultValue="NIHR Bristol Biomedical Research Centre" 
+      />
 
       <SubSection title="Format & Standards" color="#EF4444" />
       <Field path="accessibility.formatAndStandards.vocabularyEncodingScheme" label="Controlled Vocabulary" required type="multiselect" options={OPTIONS.vocabularyEncodingScheme} />

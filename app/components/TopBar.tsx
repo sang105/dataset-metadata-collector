@@ -22,7 +22,7 @@ export function TopBar({ onExport, onReset }: TopBarProps) {
           <span 
             className="hover:bg-[linear-gradient(135deg,#0EA5E9,#6366F1)] hover:text-white hover:cursor-pointer hover:font-bold hover:shadow-2xl hover:border-[linear-gradient(135deg,#0EA5E9,#6366F1)] text-white bg-transparent text-xs border rounded-3xl transition border-[#FFF] py-1 px-2 font-sans"
           >
-            IEU HDRUK METADATA COLLECTOR
+            METADATA COLLECTOR
           </span>
         </NavLink>
       </div>

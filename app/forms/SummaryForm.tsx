@@ -24,8 +24,9 @@ export function SummaryFormLayout() {
                     label="Contact Point (Email)" 
                     type="email"
                     required
-                    defaultValue='sm.colley@bristol.ac.uk'
-                    readOnly
+                    placeholder="info@hdruk.ac.uk"
+                    // defaultValue='sm.colley@bristol.ac.uk'
+                    // readOnly
                 />
                 <Field 
                     path="summary.populationSize" 
@@ -65,17 +66,20 @@ export function SummaryFormLayout() {
                 <Field 
                     path="summary.dataCustodian.contactPoint" 
                     label="Contact Email"     
-                    required type="email" 
-                    defaultValue="sm.colley@bristol.ac.uk"
-                    readOnly
+                    required type="email"
+                    placeholder="info@hdruk.ac.uk"
+                    // defaultValue="sm.colley@bristol.ac.uk"
+                    // readOnly
                 />
             </Grid2>
             <Grid2>
                 <Field 
                     path="summary.dataCustodian.identifier" 
                     label="Data Custodian Identifier"   
-                    readOnly
-                    defaultValue="NIHR Bristol Biomedical Research Centre"
+                    placeholder="NIHR Bristol Biomedical Research Centre"
+                    required
+                    // readOnly
+                    // defaultValue="NIHR Bristol Biomedical Research Centre"
                 />
                 <Field 
                     path="summary.dataCustodian.memberOf"   

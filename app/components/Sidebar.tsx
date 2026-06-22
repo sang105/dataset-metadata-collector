@@ -16,10 +16,10 @@ export function Sidebar() {
       {/* Brand */}
       <div style={{ padding: "18px 16px 14px", borderBottom: "1px solid #0D1B2E" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-          <div style={{ width: 28, height: 28, background: "linear-gradient(135deg,#0EA5E9,#6366F1)", borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif", flexShrink: 0 }}>IEU</div>
+          {/* <div style={{ width: 28, height: 28, background: "linear-gradient(135deg,#0EA5E9,#6366F1)", borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, color: "#fff", fontFamily: "'DM Sans', sans-serif", flexShrink: 0 }}>IEU</div> */}
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#0B1629", lineHeight: 1.2 }}>HDRUK</div>
-            <div style={{ fontSize: 11, color: "#334155", textTransform: "uppercase", letterSpacing: "0.1em" }}>Dataset Creator</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#0B1629", lineHeight: 1.2 }}>Dataset Creator</div>
+            {/* <div style={{ fontSize: 11, color: "#334155", textTransform: "uppercase", letterSpacing: "0.1em" }}>Dataset Creator</div> */}
           </div>
         </div>
 

@@ -13,7 +13,7 @@ export interface SummarySection {
   title: string;
   abstract: string;
   contactPoint: string;
-  populationSize: number | string;
+  populationSize: number | null;
   keywords: string[];
   doiName: string[] | null;
   datasetAliases: string[] | null;

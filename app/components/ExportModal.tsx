@@ -48,7 +48,7 @@ export function ExportModal({ onConfirm, onClose }: ExportModalProps) {
             {SECTIONS.map(s => {
               const p = progressMap[s.id];
               return (
-                <span key={s.id} style={{ fontSize: 10, padding: "2px 9px", borderRadius: 20, border: `1px solid ${p?.isComplete ? "#10B981" : "#1E2D45"}`, color: p?.isComplete ? "#10B981" : "#334155", fontFamily: "'DM Mono', monospace" }}>
+                <span key={s.id} style={{ fontSize: 10, padding: "2px 9px", borderRadius: 20, border: `1px solid ${p?.isComplete ? "#10B981" : "#1E2D45"}`, color: p?.isComplete ? "#10B981" : "#334155", fontFamily: "'DM Sans', sans-serif" }}>
                   {s.short} {p?.pct || 0}%
                 </span>
               );
@@ -121,7 +121,7 @@ export function ResetModal({ onConfirm, onClose }: ResetModalProps) {
             {SECTIONS.map(s => {
               const p = progressMap[s.id];
               return (
-                <span key={s.id} style={{ fontSize: 10, padding: "2px 9px", borderRadius: 20, border: `1px solid ${p?.isComplete ? "#10B981" : "#1E2D45"}`, color: p?.isComplete ? "#10B981" : "#334155", fontFamily: "'DM Mono', monospace" }}>
+                <span key={s.id} style={{ fontSize: 10, padding: "2px 9px", borderRadius: 20, border: `1px solid ${p?.isComplete ? "#10B981" : "#1E2D45"}`, color: p?.isComplete ? "#10B981" : "#334155", fontFamily: "'DM Sans', sans-serif" }}>
                   {s.short} {p?.pct || 0}%
                 </span>
               );
@@ -152,7 +152,7 @@ export function ResetModal({ onConfirm, onClose }: ResetModalProps) {
               fontSize: 13,
               outline: "none",
               boxSizing: "border-box",
-              fontFamily: "'DM Mono', monospace",
+              fontFamily: "'DM Sans', sans-serif",
               transition: "border-color 0.2s, box-shadow 0.2s",
               boxShadow: isConfirmed ? "0 0 0 3px rgba(239,68,68,0.12)" : "none",
             }}

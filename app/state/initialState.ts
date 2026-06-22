@@ -3,7 +3,7 @@
 export function createInitialState() {
     return {
         summary: {
-            title: "", abstract: "", contactPoint: "", populationSize: "",
+            title: "", abstract: "", contactPoint: "", populationSize: null,
             keywords: [], doiName: null, datasetAliases: null,
             dataCustodian: { identifier: "", name: [], logo: null, description: null, contactPoint: "", memberOf: null }
         },

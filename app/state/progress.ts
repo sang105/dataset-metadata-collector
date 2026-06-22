@@ -1,11 +1,11 @@
 import type { FormState, ProgressMap, SectionProgress } from "~/types/form";
 
 const TRACKED: Record<string, string[]> = {
-    summary: ["summary.title","summary.abstract","summary.contactPoint","summary.populationSize", "summary.dataCustodian.name","summary.dataCustodian.contactPoint"],
+    summary: ["summary.title","summary.abstract","summary.contactPoint","summary.populationSize", "summary.dataCustodian.name","summary.dataCustodian.contactPoint", "summary.dataCustodian.identifier"],
     documentation: ["documentation.description"],
     coverage: ["coverage.spatial"],
     provenance: ["provenance.origin.datasetType", "provenance.origin.imageContrast", "provenance.temporal.publishingFrequency","provenance.temporal.startDate", "provenance.temporal.timeLag"],
-    accessibility: ["accessibility.access.accessRights","accessibility.formatAndStandards.vocabularyEncodingScheme", "accessibility.formatAndStandards.language", "accessibility.formatAndStandards.format", "accessibility.formatAndStandards.conformsTo"],
+    accessibility: ["accessibility.access.accessRights","accessibility.access.dataController","accessibility.access.dataProcessor","accessibility.formatAndStandards.vocabularyEncodingScheme", "accessibility.formatAndStandards.language", "accessibility.formatAndStandards.format", "accessibility.formatAndStandards.conformsTo"],
     enrichmentAndLinkage: ["enrichmentAndLinkage.investigations","enrichmentAndLinkage.tools"],
     structuralMetadata: ["_tables"],
     omics: ["omics.assay", "omics.platform"]
